@@ -10,23 +10,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(?:js|mjs|cjs)$/,
+        test: /\.(js|jsx)$/, // <-- added `|jsx` here
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              ["@babel/preset-env", { targets: "defaults" }],
-              "@babel/preset-react",
-            ],
-          },
-        },
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
+  resolve: {
+    extensions: ["*", ".js", ".jsx"], // <-- added `.jsx` here
+  },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "./src/index.html"),
+      template: path.join(__dirname, "./public/index.html"),
     }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "./dist"),
+    },
+    port: 9000,
+  },
 };
