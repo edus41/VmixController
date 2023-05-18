@@ -1,30 +1,24 @@
-import React, { useEffect } from "react";
-import { Button } from "@mui/material";
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-const ParentComponent = () => {
+const KeyPressHandler = () => {
+  const buttons = useSelector((state) => state.data.buttons)
+
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
+    const handleKeyUp = (event) => {
+      const pressedKey = event.key.toLowerCase()
+
+      const matchingButtons = buttons.filter((button) => button.shortcut.toLowerCase() === pressedKey)
+    }
+
+    document.addEventListener('keyup', handleKeyUp)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyPress);
-    };
-  }, []);
-
-  const handleClick = () => {
-    console.log("Button clicked!");
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "A" || event.key === "a") {
-      handleClick();
+      document.removeEventListener('keyup', handleKeyUp)
     }
-  };
+  }, [buttons])
 
-  return (
-    <div>
-      <Button onClick={handleClick}>TEST</Button>
-    </div>
-  );
-};
+  return <div></div>
+}
 
-export default ParentComponent;
+export default KeyPressHandler
