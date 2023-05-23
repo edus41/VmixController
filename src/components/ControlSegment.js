@@ -9,13 +9,10 @@ const ControlSegment = ({ equipos, buttons }) => {
 
   return (
     <div>
-      {buttons.length === 0 ? null : (
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {filter('All').length > 0 ? <ControlComp name="General" buttons={filter('All')} /> : null}
-
-          {equipos.map((equipo, index) => (filter(equipo.name).length > 0 ? <ControlComp key={index} name={equipo.name} color={equipo.color} buttons={filter(equipo.name)} /> : null))}
-        </div>
-      )}
+      <ControlComp name="General" buttons={filter('All')} />
+      {equipos.map((equipo, index) => (
+        <ControlComp key={index} name={equipo.name} color={equipo.color} buttons={filter(equipo.name)} />
+      ))}
     </div>
   )
 }

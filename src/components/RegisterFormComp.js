@@ -17,7 +17,7 @@ export default function RegisterForm() {
           name: '',
           ip: '',
           port: '',
-          color: 1,
+          color: 0,
         }
   }, [editIndex, equipos])
 
@@ -59,6 +59,10 @@ export default function RegisterForm() {
     dispatch(editIP({ index: editIndex, updatedPC: formData }))
   }
 
+  const handleCancelItem = () => {
+    dispatch(setIpIndex(null))
+  }
+
   const handleColorClick = (index) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -67,28 +71,30 @@ export default function RegisterForm() {
   }
 
   return (
-    <div style={{ marginTop: '30px' }}>
-      <form
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%',
-          marginTop: '15px',
-        }}
-      >
-        <TextField label="Nombre" name="name" size="small" value={formData.name} onChange={handleInputChange} required style={{ width: '30%', marginRight: '10px' }} />
-        <TextField label="IP" name="ip" size="small" value={formData.ip} onChange={handleInputChange} required style={{ width: '30%', marginRight: '10px' }} />
-        <TextField label="Port" name="port" size="small" value={formData.port} onChange={handleInputChange} required style={{ width: '20%', marginRight: '10px' }} />
-        <ColorSelector colorIndex={formData.color} onColorSelect={handleColorClick} />
-        {editIndex !== null ? (
-          <Button variant="contained" onClick={handleUpdateItem} disabled={!isFormValid} style={{ width: '20%' }}>
-            Actualizar
-          </Button>
-        ) : (
-          <Button variant="contained" onClick={handleAddItem} disabled={!isFormValid} style={{ width: '20%' }}>
-            Agregar
-          </Button>
-        )}
+    <div>
+      <form style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <TextField label="Nombre" name="name" size="small" value={formData.name} onChange={handleInputChange} required style={{ width: '45%', marginRight: '10px' }} />
+          <TextField label="IP" name="ip" size="small" value={formData.ip} onChange={handleInputChange} required style={{ width: '35%', marginRight: '10px' }} />
+          <TextField label="Port" name="port" size="small" value={formData.port} onChange={handleInputChange} required style={{ width: '20%' }} />
+        </div>
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <ColorSelector colorIndex={formData.color} onColorSelect={handleColorClick} />
+          {editIndex !== null ? (
+            <div style={{ marginTop: '10px' }}>
+              <Button variant="contained" onClick={handleUpdateItem} disabled={!isFormValid} color="primary">
+                Actualizar
+              </Button>
+              <Button variant="contained" color="error" onClick={handleCancelItem} disabled={!isFormValid} style={{ marginLeft: 10 }}>
+                Cancelar
+              </Button>
+            </div>
+          ) : (
+            <Button variant="contained" onClick={handleAddItem} disabled={!isFormValid} style={{ width: '19.5%', marginTop: '10px' }}>
+              Agregar
+            </Button>
+          )}
+        </div>
       </form>
     </div>
   )

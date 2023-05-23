@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setData } from '../redux/dataSlice'
 import Button from '@material-ui/core/Button'
+import Logo from './Logo'
 
 const SaveButton = () => {
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const SaveButton = () => {
   }
 
   return (
-    <Button variant="contained" color="primary" onClick={saveDataToFile} style={{ backgroundColor: '#1976D2', color: '#FFFFFF' }}>
+    <Button variant="contained" color="primary" size="small" onClick={saveDataToFile} style={{ backgroundColor: '#1976D2', color: '#FFFFFF', width: '100px' }}>
       Guardar
     </Button>
   )
@@ -58,7 +59,7 @@ const LoadButton = () => {
     <div>
       <input accept=".txt" id="file-upload" type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
       <label htmlFor="file-upload">
-        <Button variant="contained" color="primary" component="span" style={{ backgroundColor: '#1976D2', color: '#FFFFFF' }}>
+        <Button variant="contained" color="primary" component="span" size="small" style={{ backgroundColor: '#1976D2', color: '#FFFFFF', width: '100px' }}>
           Cargar
         </Button>
       </label>
@@ -78,8 +79,8 @@ const ResetButton = () => {
   }
 
   return (
-    <Button variant="contained" color="primary" style={{ backgroundColor: '#1976D2', color: '#FFFFFF' }} onClick={handleReset}>
-      Reiniciar
+    <Button variant="contained" color="primary" size="small" style={{ backgroundColor: '#1976D2', color: '#FFFFFF', width: '100px' }} onClick={handleReset}>
+      Reset
     </Button>
   )
 }
@@ -88,28 +89,30 @@ const Header = () => {
   return (
     <div
       style={{
+        width: '100%',
         display: 'flex',
         alignItems: 'center',
-        width: '100%',
         height: '30px',
         justifyContent: 'space-between',
-        position: 'fixed',
-        top: 0,
         background: 'linear-gradient(to right, #111111, #333333)',
-        padding: '10px',
+        paddingTop: '10px',
+        paddingBottom: '10px',
         color: 'white',
       }}
     >
-      <div>
-        <h3 style={{ margin: 0 }}>VmixController</h3>
+      <div style={{ display: 'flex', alignItems: 'center', marginLeft: 10 }}>
+        <Logo />
+        <h3 style={{ margin: 0, marginLeft: 15 }}>VmixController</h3>
       </div>
-      <div style={{ display: 'flex' }}>
-        <SaveButton />
-        <div style={{ marginLeft: 20 }}>
+      <div style={{ display: 'flex', marginRight: 15 }}>
+        <div style={{ marginLeft: 10 }}>
+          <ResetButton />
+        </div>
+        <div style={{ marginLeft: 10 }}>
           <LoadButton />
         </div>
-        <div style={{ marginLeft: 20, marginRight: 30 }}>
-          <ResetButton />
+        <div style={{ marginLeft: 10 }}>
+          <SaveButton />
         </div>
       </div>
     </div>
