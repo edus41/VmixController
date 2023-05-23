@@ -235,10 +235,10 @@ export default function ControlButtonFormComp() {
         <Grid item xs={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
           {editIndex !== null ? (
             <div style={{ display: 'flex' }}>
-              <Button variant="contained" onClick={handleUpdateItem} disabled={!isFormValid} color="primary">
+              <Button variant="contained" onClick={handleUpdateItem} color="primary">
                 Actualizar
               </Button>
-              <Button variant="contained" color="error" onClick={handleCancelItem} disabled={!isFormValid} style={{ marginLeft: 10 }}>
+              <Button variant="contained" color="error" onClick={handleCancelItem} style={{ marginLeft: 10 }}>
                 Cancelar
               </Button>
             </div>

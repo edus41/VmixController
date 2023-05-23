@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   ips: [
-    { name: 'Vmix N° 1', ip: '192.168.1.42', port: '8088', color: 2, ping: 0 },
-    { name: 'Vmix N° 2', ip: '192.168.1.52', port: '8088', color: 1, ping: 0 },
+    { name: 'Vmix N° 1', ip: '192.168.1.42', port: '8088', color: 2 },
+    { name: 'Vmix N° 2', ip: '192.168.1.52', port: '8088', color: 1 },
   ],
   ipIndex: null,
   buttons: [

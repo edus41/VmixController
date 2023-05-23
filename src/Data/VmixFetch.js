@@ -19,26 +19,26 @@ export async function vmixFetch(button, equipos) {
   }
 
   if (equipo.name === 'All') {
-    for (const equipoItem of equipos) {
-      const { ip, port } = equipoItem
-      let queryString = `http://${ip}:${port}/API/?Function=${func}${queryParams}`
-
-      try {
-        const response = await fetch(queryString)
-        console.log('response :>> ', response)
-      } catch (error) {
-        console.log('error :>> ', error)
-      }
-    }
+    equipos.map(async (equipo) => {
+      const { ip, port } = equipo
+      const queryString = `http://${ip}:${port}/API/?Function=${func}${queryParams}`
+      fetch(queryString)
+        .then((r) => {
+          console.log(`[SUCCESS]: ${ip}`)
+        })
+        .catch((e) => {
+          console.log(`[ERROR]: ${ip}`)
+        })
+    })
   } else {
     const { ip, port } = equipo
-    let queryString = `http://${ip}:${port}/API/?Function=${func}${queryParams}`
-
-    try {
-      const response = await fetch(queryString)
-      console.log('response :>> ', response)
-    } catch (error) {
-      console.log('error :>> ', error)
-    }
+    const queryString = `http://${ip}:${port}/API/?Function=${func}${queryParams}`
+    fetch(queryString)
+      .then((r) => {
+        console.log(`[SUCCESS]: ${ip}`)
+      })
+      .catch((e) => {
+        console.log(`[ERROR]: ${ip}`)
+      })
   }
 }

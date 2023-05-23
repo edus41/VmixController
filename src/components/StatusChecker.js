@@ -1,31 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined'
 import PublicOffOutlinedIcon from '@mui/icons-material/PublicOffOutlined'
-
 import { Box } from '@mui/material'
 
 export default function StatusChecker({ ip, port }) {
-  const [responseTime, setResponseTime] = useState(null)
+  const [responseTime, setResponseTime] = useState(undefined)
   const [color, setColor] = useState('green')
 
   useEffect(() => {
     const pingInterval = setInterval(() => {
       const startTime = performance.now()
-      fetch(`http://${ip}:${port}`)
+      fetch(`http://${ip}:${port}/API`)
         .then((response) => {
-          const endTime = performance.now()
-
           if (response.status === 200) {
-            const timeElapsed = endTime - startTime
-            setResponseTime(Math.round(timeElapsed))
+            const endTime = performance.now()
+            const ping = Math.round(endTime - startTime)
+            setResponseTime(ping)
           } else {
-            setResponseTime(null)
+            setResponseTime(0)
           }
         })
-        .catch((error) => {
-          setResponseTime(null)
+        .catch(() => {
+          setResponseTime(0)
         })
-    }, 1000)
+    }, 2000)
 
     return () => {
       clearInterval(pingInterval)

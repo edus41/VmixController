@@ -1,6 +1,6 @@
 //ConectionTableComp.js
 import React, { useState, useEffect } from 'react'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, Grid } from '@mui/material'
+import { Button, Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import StatusChecker from './StatusChecker'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -63,7 +63,7 @@ const IpTable = ({ equipo, index }) => {
           }}
           fontSize={13}
         >
-          <StatusChecker ip={equipo.ip} port={equipo.port} />
+          <StatusChecker name={equipo.name} ip={equipo.ip} port={equipo.port} />
         </Box>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center', width: '20%' }}>
